@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+/* Enables the `dark:` variant to be driven by a `.dark` class on <html>
+   (toggled by ThemeContext) instead of only the OS color-scheme setting. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Primary = indigo, accent = purple/fuchsia — matches the Home page hero */
+  --color-navy: #4F46E5;
+  --color-navy-dark: #4338CA;
+  --color-amber: #C026D3;
+  --color-amber-dark: #A21CAF;
+  --color-accent-2: #7C3AED;
+  --color-bg: #F7F7FB;
+  --color-surface: #FFFFFF;
+  --color-text: #1A1A2E;
+  --color-text-muted: #5B6472;
+  --color-border: #E4E4F0;
+  --color-success: #2F9E44;
+  --color-danger: #D64545;
+  --shadow-color: 250 60% 60%;
+  --hero-bg: #EEF0FF;
+}
+
+.dark {
+  --color-navy: #818CF8;
+  --color-navy-dark: #6366F1;
+  --color-amber: #E879F9;
+  --color-amber-dark: #D946EF;
+  --color-accent-2: #A78BFA;
+  --color-bg: #0B0A17;
+  --color-surface: #14132A;
+  --color-text: #EDEBFA;
+  --color-text-muted: #9C97BE;
+  --color-border: #292648;
+  --color-success: #4ADE80;
+  --color-danger: #F87171;
+  --shadow-color: 250 70% 3%;
+  --hero-bg: #030217;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: 'Sora', sans-serif;
+}
+
+/* visible keyboard focus */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 2px;
+}
+
+/* Smooth color/background transitions on the interactive elements this app
+   themes most heavily, without adding transition-* classes everywhere. */
+a, button, input, textarea, select, .themed-surface {
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+/* Custom scrollbar, themed */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-navy);
+}
+
+/* Reusable card/surface utility with a soft themed shadow */
+.card-surface {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 1px 2px hsl(var(--shadow-color) / 0.06),
+    0 8px 24px -12px hsl(var(--shadow-color) / 0.18);
+}
+
+.card-surface:hover {
+  box-shadow: 0 2px 4px hsl(var(--shadow-color) / 0.08),
+    0 16px 32px -14px hsl(var(--shadow-color) / 0.24);
+}
+
+/* Subtle gradient used behind hero / call-to-action sections */
+.hero-gradient {
+  background:
+    radial-gradient(60% 60% at 15% 15%, color-mix(in srgb, var(--color-amber) 12%, transparent) 0%, transparent 60%),
+    radial-gradient(50% 50% at 85% 0%, color-mix(in srgb, var(--color-navy) 16%, transparent) 0%, transparent 60%),
+    var(--color-bg);
+}
+
+@keyframes fade-slide-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fade-slide-up 0.4s ease both;
+}
+
+/* Simple spin used for upload/loading states */
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 1s linear infinite;
+}
